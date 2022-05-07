@@ -23,10 +23,13 @@ def startBot(client, bToken):
 
 def main():
     config = configparser.ConfigParser()
-    with open('info.ini', 'w') as cfgFile:
-        config['INFO'] = {'bottoken': ''}
-        config.write(cfgFile)
     config.read('info.ini')
+    try:
+        config['INFO']['BotToken'] = config['INFO']['BotToken']
+    except KeyError:
+        with open('info.ini', 'w') as cfgFile:
+            config['INFO'] = {'bottoken': ''}
+            config.write(cfgFile)
     if config['INFO']['BotToken'] == '':
         config['INFO']['BotToken'] = input('Please enter your bot token:')
     bToken = config['INFO']['BotToken']
