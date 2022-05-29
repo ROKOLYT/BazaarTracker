@@ -5,7 +5,8 @@ import sys
 from handlingData import handleData
 from menu import startBuild
 import configparser
-
+import random
+global num
 active = False
 if sys.version_info[0] == 3 and sys.version_info[1] >= 8 and sys.platform.startswith('win'):
     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
@@ -50,6 +51,22 @@ def main():
         await startBuild(ctx, client, data)
         active = False
 
+    def check(message):
+        usr_number = int(message.content)
+        return usr_number
+
+    @client.command()
+    async def roll(ctx, usr_number: int):
+        global num
+        num = random.randrange(1, 10)
+        while True:
+            if num == usr_number:
+                await ctx.send(f'You won the number was indeed {num}')
+                break
+            else:
+                await ctx.send(f'Keep on guessing')
+                usr_number = await client.wait_for('message', timeout=20.0, check=check)
+                usr_number = int(usr_number.content)
     startBot(client, bToken)
 
 
