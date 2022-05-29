@@ -6,7 +6,7 @@ from handlingData import handleData
 from menu import startBuild
 import configparser
 import random
-global num
+
 active = False
 if sys.version_info[0] == 3 and sys.version_info[1] >= 8 and sys.platform.startswith('win'):
     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
@@ -57,7 +57,6 @@ def main():
 
     @client.command()
     async def roll(ctx, usr_number: int):
-        global num
         num = random.randrange(1, 10)
         while True:
             if num == usr_number:
