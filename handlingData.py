@@ -2,6 +2,7 @@ import urllib.request
 import json
 
 
+# Invert dict
 def flipDict(d):
     result = {}
     for (k, v) in d.items():
@@ -9,6 +10,7 @@ def flipDict(d):
     return result
 
 
+# Create database
 class handleData:
     def __init__(self, url):
         self.url = url
